@@ -15,4 +15,13 @@ using namespace std;
 
 
 
+/**
+ * Converts csv contents to a vector
+ * @param csvFile The csv file to be read.
+ * @return A vector containing matrix data.
+*/
+vector<vector<double>> csvToData(char* & csvFile);
+
+
+
 #endif

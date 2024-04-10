@@ -7,14 +7,18 @@
 
 
 #include "helper.hpp"
+#include "input.hpp"
 #include "construct.hpp"
 #include <iostream>
+#include <string>
 #include <cassert>
 
 #define MESSAGE_SUCCESS "Success"
 #define MESSAGE_FAILURE "Failure"
 #define CON_MATRIX_PASS "Construct Matrix Passes"
 #define CON_MATRIX_FAIL "Construct Matrix Fails"
+#define CSV_TO_DATA_PASS "CSV converted"
+#define CSV_TO_DATA_FAIL "CSV was unable to be converted"
 #define STATUS FALSE
 
 
@@ -24,13 +28,59 @@
  * @return none
 */
 void test_construct_matrix() {
-    vector<double> row_vec = {1.0, 0.0, 0.0, 1.0};
+    vector<double> vec = {1.0, 0.0, 0.0, 1.0};
     vector<vector<double>> exp_matrix = {{1.0, 0.0}, {0.0, 1.0}};
-    vector<vector<double>> act_matrix = construct_matrix(row_vec);
+    vector<vector<double>> act_matrix = construct_matrix(vec);
     print_matrix(act_matrix);
+
     assert(exp_matrix == act_matrix && CON_MATRIX_FAIL);
-    
     cout << CON_MATRIX_PASS << endl;
+}
+
+
+
+/**
+ * Tests the csvToData
+ * @param path The location of the csv file.
+ * @return none
+*/
+void test_csvToData(char* & path) {
+    vector<vector<double>> exp_data = {{1.0, 0.0, 0.0, 1.0}};
+    vector<vector<double>> act_data = csvToData(path);
+    vector<vector<double>> exp_matrix = construct_matrix(exp_data[0]);
+    print_matrix(exp_matrix);
+
+    vector<vector<double>> act_matrix = construct_matrix(act_data[0]);
+    print_matrix(act_matrix);
+
+    assert(exp_data == act_data && CSV_TO_DATA_FAIL);
+    cout << CSV_TO_DATA_PASS << endl;
+}
+
+
+
+/**
+ * Tests the csvToData
+ * @param path The location of the csv file.
+ * @return none
+*/
+void test_csvToData_two(char* & path) {
+    vector<vector<double>> exp_data = {{2.0, 0.0, 0.0, 2.0},
+    {3.0, 3.0, 3.0, 3.0}};
+    vector<vector<double>> act_data = csvToData(path);
+
+    vector<vector<double>> exp_matrix = construct_matrix(exp_data[0]);
+    print_matrix(exp_matrix);
+    vector<vector<double>> exp_matrix_two = construct_matrix(exp_data[1]);
+    print_matrix(exp_matrix_two);
+
+    vector<vector<double>> act_matrix = construct_matrix(act_data[0]);
+    print_matrix(act_matrix);
+    vector<vector<double>> act_matrix_two = construct_matrix(act_data[1]);
+    print_matrix(act_matrix_two);
+
+    assert(exp_data == act_data && CSV_TO_DATA_FAIL);
+    cout << CSV_TO_DATA_PASS << endl;
 }
 
 
@@ -41,10 +91,10 @@ void test_construct_matrix() {
  * @param argv
  * @return 0 for no errors, otherwise 1.
 */
-int main() {
-
-    cout << "here" << endl;
-    test_construct_matrix();
+int main(int argc, char** argv) {
+    // test_construct_matrix();
+    // test_csvToData(argv[1]);
+    test_csvToData_two(argv[1]);
 
     return 0;
 }
