@@ -34,3 +34,20 @@ void print_matrix(vector<vector<double>> matrix) {
     }
     cout << "=============== END ================" << endl;
 }
+
+
+
+/**
+ * Prints out a vector.
+ * @param vec A vector.
+ * @return none
+*/
+void print_vector(vector<double> vec) {
+    cout << "========== print_vector() ==========" << endl;
+    cout << " [ ";
+    for (int i = 0; i < (int)vec.size(); i++) {
+        cout << vec[i] << " ";
+    }
+    cout << "]";
+    cout << "=============== END ================" << endl;
+}

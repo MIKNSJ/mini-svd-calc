@@ -1,27 +1,37 @@
 // ===== Established 2024-04-11 - 2024-0X-0X ========
 //
-//  Functionality: Provides matrix operations
+//  Functionality: Provides matrix operations.
 //
 // ==================================================
 
 
+#include "construct.hpp"
 #include "operation.hpp"
 #include <iostream>
+#include <cmath>
 
 
 
 /**
- * Finds eigenvalues using quadratic formula
+ * Finds the partial determinant of a matrix.
  * @param
- * @return Eigenvalues of a matrix
+ * @return A characteristic polynomial.
 */
 
 
 
 /**
- * Transposes a matrix
- * @param matrix The original matrix
- * @return A transposed matrix
+ * Finds eigenvalues of a matrix.
+ * @param
+ * @return The eigenvalues of a matrix.
+*/
+
+
+
+/**
+ * Transposes a matrix.
+ * @param matrix The original matrix.
+ * @return A transposed matrix.
 */
 vector<vector<double>> transpose(vector<vector<double>> matrix) {
     vector<vector<double>> transposed_matrix;
@@ -48,9 +58,45 @@ vector<vector<double>> transpose(vector<vector<double>> matrix) {
 
 /**
  * Matrix muliplication
- * @param
- * @return The product matrix between two
+ * @param A Matrix factor
+ * @param B Another matrix factor
+ * @return The product matrix between A and B.
 */
+vector<vector<double>> multiply(vector<vector<double>> A,
+    vector<vector<double>> B) {
+    vector<double> product_vec;
+    vector<vector<double>> product_matrix;
+    vector<double> B_col_vec;
+    vector<double> B_col_vec_two;
+    double leftEntry, rightEntry;
+
+    for (int i = 0; i < (int)B.size(); i++) {
+        for (int j = 0; j < (int)B[i].size(); j++) {
+            if (j % 2 == 0) {
+                B_col_vec.push_back(B[i][j]);
+            } else {
+                B_col_vec_two.push_back(B[i][j]);
+            }
+        }
+    }
+
+    for (int i = 0; i < (int)A.size(); i++) {
+        leftEntry = 0;
+        rightEntry = 0;
+
+        for (int j = 0; j < (int)A[i].size(); j++) {
+            leftEntry += A[i][j] * B_col_vec[j];
+            rightEntry += A[i][j] * B_col_vec_two[j];
+        }
+
+        product_vec.push_back(leftEntry);
+        product_vec.push_back(rightEntry);
+    }
+
+    product_matrix = construct_matrix(product_vec);
+
+    return product_matrix;
+}
 
 
 
@@ -63,23 +109,23 @@ vector<vector<double>> transpose(vector<vector<double>> matrix) {
 
 
 /**
- * Finds the null space of a matrix
+ * Finds the null space of a matrix.
  * @param
- * @return A basis of a matrix
+ * @return A basis of a matrix.
 */
 
 
 
 /**
- * Finds u-vectors
+ * Finds u-vectors.
  * @param
- * @return A set of u-vectors to form an orthogonal matrix
+ * @return A set of u-vectors to form an orthogonal matrix.
 */
 
 
 
 /**
- * Normalizes a vector
+ * Normalizes a vector.
  * @param
- * @return A normalized/unit vector
+ * @return A normalized/unit vector.
 */

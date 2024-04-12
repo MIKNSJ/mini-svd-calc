@@ -1,8 +1,8 @@
-// ===== Established 2024-04-07 - 2024-0X-0X ========
+// ===== Established 2024-04-07 - 2024-0X-0X ===========
 //
-//  Functionality: Tests out each feature of the SVD
+//  Functionality: Tests out each feature of the SVD.
 //
-// ==================================================
+// =====================================================
 
 
 
@@ -22,6 +22,8 @@
 #define CSV_TO_DATA_FAIL "CSV was unable to be converted"
 #define TRANSPOSE_PASS "Transpose successful"
 #define TRANSPOSE_FAIL "Transpose unsuccessful"
+#define MULTIPLY_PASS "Multiply successful"
+#define MULTIPLY_FAIL "Multiply unsuccessful"
 #define STATUS FALSE
 
 
@@ -106,6 +108,24 @@ void test_transpose() {
 
 
 /**
+ * Checks the product matrix
+ * @return nothing
+*/
+void test_multiply() {
+    vector<vector<double>> A = {{1, 2}, {3, 4}};
+    vector<vector<double>> B = {{5, 6}, {7, 8}};
+    vector<vector<double>> exp_matrix = {{19, 22}, {43, 50}};
+    vector<vector<double>> act_matrix;
+
+    act_matrix = multiply(A, B);
+
+    assert(exp_matrix == act_matrix && MULTIPLY_FAIL);
+    cout << MULTIPLY_PASS << endl;
+}
+
+
+
+/**
  * Enables for user input of a vector
  * @param argc
  * @param argv
@@ -115,7 +135,8 @@ int main(int argc, char** argv) {
     // test_construct_matrix();
     // test_csvToData(argv[1]);
     // test_csvToData_two(argv[1]);
-    test_transpose();
+    // test_transpose();
+    test_multiply();
 
     return 0;
 }
