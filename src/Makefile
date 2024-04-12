@@ -11,7 +11,7 @@ parts:
 	$(COMP) $(FLAGS) -o svd svd.cpp
 	$(COMP) $(FLAGS) -c construct.cpp
 	$(COMP) $(FLAGS) -c input.cpp
-	$(COMP) $(FLAGS) -c operation.cpp
+	$(COMP) $(FLAGS) -c construct.cpp operation.cpp
 	$(COMP) $(FLAGS) helper.cpp input.cpp construct.cpp operation.cpp -o test test.cpp
 	
 test:
