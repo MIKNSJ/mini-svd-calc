@@ -9,6 +9,7 @@
 #include "helper.hpp"
 #include "input.hpp"
 #include "construct.hpp"
+#include "operation.hpp"
 #include <iostream>
 #include <string>
 #include <cassert>
@@ -19,6 +20,8 @@
 #define CON_MATRIX_FAIL "Construct Matrix Fails"
 #define CSV_TO_DATA_PASS "CSV converted"
 #define CSV_TO_DATA_FAIL "CSV was unable to be converted"
+#define TRANSPOSE_PASS "Transpose successful"
+#define TRANSPOSE_FAIL "Transpose unsuccessful"
 #define STATUS FALSE
 
 
@@ -86,6 +89,23 @@ void test_csvToData_two(char* & path) {
 
 
 /**
+ * Checks the transposed matrix
+ * @return nothing
+*/
+void test_transpose() {
+    vector<vector<double>> matrix = {{1.0, 2.0}, {3.0, 4.0}};
+    vector<vector<double>> exp_matrix = {{1.0, 3.0}, {2.0, 4.0}};
+    vector<vector<double>> act_matrix;
+
+    act_matrix = transpose(matrix);
+
+    assert(exp_matrix == act_matrix && TRANSPOSE_FAIL);
+    cout << TRANSPOSE_PASS << endl;
+}
+
+
+
+/**
  * Enables for user input of a vector
  * @param argc
  * @param argv
@@ -94,7 +114,8 @@ void test_csvToData_two(char* & path) {
 int main(int argc, char** argv) {
     // test_construct_matrix();
     // test_csvToData(argv[1]);
-    test_csvToData_two(argv[1]);
+    // test_csvToData_two(argv[1]);
+    test_transpose();
 
     return 0;
 }
