@@ -1,5 +1,5 @@
 COMP=g++
-FLAGS?=-Wall -pedantic -Wextra -static-libstdc++
+FLAGS?=-g -Wall -pedantic -Wextra -static-libstdc++
 
 all: blank parts
 

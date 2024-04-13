@@ -24,6 +24,10 @@
 #define TRANSPOSE_FAIL "Transpose unsuccessful"
 #define MULTIPLY_PASS "Multiply successful"
 #define MULTIPLY_FAIL "Multiply unsuccessful"
+#define DET_PASS "Determinant matches"
+#define DET_FAIL "Determinant does not match"
+#define EVALUE_PASS "Eigenvalues match"
+#define EVALUE_FAIL "Eigenvalues does not match"
 #define STATUS FALSE
 
 
@@ -126,6 +130,52 @@ void test_multiply() {
 
 
 /**
+ * Checks the partial determinant/characteristic polynomial
+ * @return nothing
+*/
+void test_determinant() {
+    vector<vector<double>> matrix = {{1, 2}, {3, 4}};
+    vector<double> exp_char_poly = {1, -5, -2};
+    vector<double> act_char_poly;
+
+    act_char_poly = determinant(matrix);
+
+    assert(exp_char_poly == act_char_poly && DET_FAIL);
+    cout << DET_PASS << endl;
+}
+
+
+
+/**
+ * Checks the eigenvalues from the characteristic polynomial
+ * @return nothing
+*/
+void test_find_eigenvalues() {
+    vector<double> neg_dis_char_poly = {1, 2, 5}; // no roots
+    vector<double> zero_dis_char_poly = {1, -4, 4}; // one root
+    vector<double> pos_dis_char_poly = {1, -3, 2}; // two roots
+
+    vector<double> exp_neg_dis = {};
+    vector<double> exp_zero_dis = {2};
+    vector<double> exp_pos_dis = {2, 1};
+
+    vector<double> act_neg_dis;
+    vector<double> act_zero_dis;
+    vector<double> act_pos_dis;
+
+    act_neg_dis = find_eigenvalues(neg_dis_char_poly);
+    act_zero_dis = find_eigenvalues(zero_dis_char_poly);
+    act_pos_dis = find_eigenvalues(pos_dis_char_poly);
+
+    assert(exp_neg_dis == act_neg_dis && EVALUE_FAIL);
+    assert(exp_zero_dis == act_zero_dis && EVALUE_FAIL);
+    assert(exp_pos_dis == act_pos_dis && EVALUE_FAIL);
+    cout << EVALUE_PASS << endl;
+}
+
+
+
+/**
  * Enables for user input of a vector
  * @param argc
  * @param argv
@@ -136,7 +186,9 @@ int main(int argc, char** argv) {
     // test_csvToData(argv[1]);
     // test_csvToData_two(argv[1]);
     // test_transpose();
-    test_multiply();
+    // test_multiply();
+    // test_determinant();
+    test_find_eigenvalues();
 
     return 0;
 }

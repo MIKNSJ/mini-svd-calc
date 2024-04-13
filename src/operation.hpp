@@ -16,17 +16,20 @@ using namespace std;
 
 /**
  * Finds the partial determinant of a matrix.
- * @param
+ * @param matrix A matrix
  * @return A characteristic polynomial.
 */
+vector<double> determinant(vector<vector<double>> matrix);
 
 
 
 /**
- * Finds eigenvalues using quadratic formula
- * @param
- * @return Eigenvalues of a matrix
+ * Finds the eigenvalues of a matrix.
+ * NOTE: We are only considering real eigenvalues.
+ * @param char_poly The characteristic polynomial.
+ * @return The eigenvalues of a matrix, if the discriminant is not negative.
 */
+vector<double> find_eigenvalues(vector<double> char_poly);
 
 
 

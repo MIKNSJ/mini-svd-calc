@@ -14,17 +14,60 @@
 
 /**
  * Finds the partial determinant of a matrix.
- * @param
+ * @param matrix A matrix
  * @return A characteristic polynomial.
 */
+vector<double> determinant(vector<vector<double>> matrix) {
+    vector<double> char_poly;
+    double a, ab, c;
+
+    // p(x) = ax^2 + bx + c, ad - bc, where diagonals are n - \lambda
+    a = 1.0;
+    ab = (-1.0 * matrix[0][0]) + (-1.0 * matrix[1][1]);
+    c = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+
+    char_poly.push_back(a);
+    char_poly.push_back(ab);
+    char_poly.push_back(c);
+
+    return char_poly;
+}
 
 
 
 /**
- * Finds eigenvalues of a matrix.
- * @param
+ * Finds the eigenvalues of a matrix.
+ * NOTE: We are only considering real eigenvalues.
+ * @param char_poly The characteristic polynomial.
  * @return The eigenvalues of a matrix.
 */
+vector<double> find_eigenvalues(vector<double> char_poly) {
+    vector<double> eigenvalues;
+    double discriminant;
+    double a, b;
+
+    discriminant = pow(char_poly[1], 2) - (4.0 * char_poly[0] * char_poly[2]);
+
+    if (discriminant < 0) {
+        return eigenvalues;
+    } else if (discriminant == 0) {
+        eigenvalues.push_back(-char_poly[1] / (2.0 * char_poly[0]));
+        return eigenvalues;
+    } else {
+        a = ((-char_poly[1] - discriminant) / (2.0 * char_poly[0]));
+        b = ((-char_poly[1] + discriminant) / (2.0 * char_poly[0]));
+
+        if (a >= b) {
+            eigenvalues.push_back(a);
+            eigenvalues.push_back(b);
+        } else {
+            eigenvalues.push_back(b);
+            eigenvalues.push_back(a);
+        }
+
+        return eigenvalues;
+    }
+}
 
 
 
