@@ -169,6 +169,22 @@ vector<vector<double>> multiply(vector<vector<double>> A,
 
 /**
  * Normalizes a vector.
- * @param
+ * @param vec A vector.
  * @return A normalized/unit vector.
 */
+vector<double> normalize(vector<double> vec) {
+    vector<double> nor_vec;
+    double magnitude = 0;
+
+    for (int i = 0; i < (int)vec.size(); i++) {
+        magnitude += pow(vec[i], 2);
+    }
+
+    magnitude = sqrt(magnitude);
+
+    for (int i = 0; i < (int)vec.size(); i++) {
+        nor_vec.push_back(vec[i] / magnitude);
+    }
+
+    return nor_vec;
+}

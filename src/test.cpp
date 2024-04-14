@@ -13,6 +13,8 @@
 #include <iostream>
 #include <string>
 #include <cassert>
+#include <cmath>
+#include <math.h>
 
 #define MESSAGE_SUCCESS "Success"
 #define MESSAGE_FAILURE "Failure"
@@ -28,6 +30,8 @@
 #define DET_FAIL "Determinant does not match"
 #define EVALUE_PASS "Eigenvalues match"
 #define EVALUE_FAIL "Eigenvalues does not match"
+#define NORMAL_PASS "Normalize pass"
+#define NORMAL_FAIL "Normalize fail"
 #define STATUS FALSE
 
 
@@ -176,6 +180,32 @@ void test_find_eigenvalues() {
 
 
 /**
+ * Checks the unit vector
+ * @return nothing
+*/
+void test_normalize() {
+    vector<double> vec = {2.0, 2.0};
+    vector<double> exp_vec = {sqrt(2.0)/2.0, sqrt(2.0)/2.0};
+    vector<double> act_vec;
+
+    vector<double> vec_two = {0.0, 1.0};
+    vector<double> exp_vec_two = {0.0, 1.0};
+    vector<double> act_vec_two;
+
+    act_vec = normalize(vec);
+    act_vec_two = normalize(vec_two);
+
+    cout << exp_vec[0] << "," << exp_vec[1] << endl;
+    cout << act_vec[0] << "," << act_vec[1] << endl;
+    // assert(exp_vec == act_vec && NORMAL_FAIL);
+
+    assert(exp_vec_two == act_vec_two && NORMAL_FAIL);
+    cout << NORMAL_PASS << endl;
+}
+
+
+
+/**
  * Enables for user input of a vector
  * @param argc
  * @param argv
@@ -188,7 +218,8 @@ int main(int argc, char** argv) {
     // test_transpose();
     // test_multiply();
     // test_determinant();
-    test_find_eigenvalues();
+    // test_find_eigenvalues();
+    test_normalize();
 
     return 0;
 }

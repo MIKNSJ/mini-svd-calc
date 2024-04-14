@@ -80,9 +80,10 @@ vector<vector<double>> multiply(vector<vector<double>> A,
 
 /**
  * Normalizes a vector.
- * @param
+ * @param vec A vector.
  * @return A normalized/unit vector.
 */
+vector<double> normalize(vector<double> vec);
 
 
 
