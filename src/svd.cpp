@@ -41,49 +41,21 @@ int main(int argc, char** argv) {
         vector<vector<double>> s_matrix;
         vector<vector<double>> v_matrix;
 
-        // check if zero matrix
-        double zero_cnt = 0;
-
-        // loop through entries
-        for (int i = 0; i < (int)A.size(); i++) {
-            for (int j = 0; j < (int)A.size(); j++) {
-                if (A[i][j] == 0) {
-                    zero_cnt++;
-                }
-            }
-        }
-
-        // all entries are zero, early termination
-        if (zero_cnt == 4) {
-            u_matrix = {{1, 0}, {0, 1}};
-            s_matrix = {{0, 0}, {0, 0}};
-            v_matrix = {{1, 0}, {0, 1}};
-
-            cout << "A matrix =" << endl;
-            print_matrix(A);
-            cout << " " << endl;
-
-            cout << "U matrix =" << endl;
-            print_matrix(u_matrix);
-            cout << " " << endl;
-
-            cout << "S matrix =" << endl;
-            print_matrix(s_matrix);
-            cout << " " << endl;
-
-            cout << "V^T matrix =" << endl;
-            print_matrix(v_matrix);
-
-            return 0;
-        }
-
         vector<double> char_poly = determinant(ATA);
         vector<double> eigenvalues = find_eigenvalues(char_poly);
 
+        // If two eigenvalues are the same, then terminate.
+        if (eigenvalues[0] == eigenvalues[1]) {
+            cout <<
+            "Please rerun the program and enter a real matrix with" <<
+            "distinct eigenvalues." << endl;
+            return 0;
+        }
+
         // check if non-real matrix
         if (eigenvalues.size() == 0) {
-            cout << "Please rerun the program and enter a real matrix."
-                << endl;
+            cout << "Please rerun the program and enter a real matrix with" <<
+            "distinct eigenvalues." << endl;
             return 0;
         }
 
