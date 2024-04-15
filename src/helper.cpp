@@ -48,6 +48,6 @@ void print_vector(vector<double> vec) {
     for (int i = 0; i < (int)vec.size(); i++) {
         cout << vec[i] << " ";
     }
-    cout << "]";
+    cout << "]" << endl;
     cout << "=============== END ================" << endl;
 }

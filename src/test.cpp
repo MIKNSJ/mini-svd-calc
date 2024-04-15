@@ -32,6 +32,12 @@
 #define EVALUE_FAIL "Eigenvalues does not match"
 #define NORMAL_PASS "Normalize pass"
 #define NORMAL_FAIL "Normalize fail"
+#define NS_PASS "Null space pass"
+#define NS_FAIL "Null space fail"
+#define U_VEC_PASS "U_VEC matches"
+#define U_VEC_FAIL "U_VEC fails"
+#define RREF_PASS "RREF matches"
+#define RREF_FAIL "RREF fails"
 #define STATUS FALSE
 
 
@@ -206,6 +212,60 @@ void test_normalize() {
 
 
 /**
+ * Checks the null space
+ * @return nothing
+*/
+void test_null_space() {
+    vector<vector<double>> matrix = {{1, 3}, {0, 0}};
+    vector<double> exp_basis = {-3, 1};
+    vector<double> act_basis;
+
+    act_basis = null_space(matrix);
+
+    assert(exp_basis == act_basis && NS_FAIL);
+    cout << NS_PASS << endl;
+}
+
+
+
+/**
+ * Checks the u-vec
+ * @return nothing
+*/
+void test_find_u_vec() {
+    double s_value = 2;
+    vector<vector<double>> matrix = {{1, 2}, {3, 4}};
+    vector<double> eigenvector = {10, 20};
+
+    vector<double> exp_u_vec = {25, 55};
+    vector<double> act_u_vec;
+
+    act_u_vec = find_u_vec(s_value, matrix, eigenvector);
+
+    assert(exp_u_vec == act_u_vec && U_VEC_FAIL);
+    cout << U_VEC_PASS << endl;
+}
+
+
+
+/**
+ * Checks the rref
+ * @return nothing
+*/
+void test_rref() {
+    vector<vector<double>> matrix = {{15, -15}, {-15, 15}};
+    vector<vector<double>> exp_matrix = {{1, -1}, {0, 0}};
+    vector<vector<double>> act_matrix;
+
+    act_matrix = rref(exp_matrix);
+
+    assert(exp_matrix == act_matrix && RREF_FAIL);
+    cout << RREF_PASS << endl;
+}
+
+
+
+/**
  * Enables for user input of a vector
  * @param argc
  * @param argv
@@ -219,7 +279,10 @@ int main(int argc, char** argv) {
     // test_multiply();
     // test_determinant();
     // test_find_eigenvalues();
-    test_normalize();
+    // test_normalize();
+    // test_null_space();
+    // test_find_u_vec();
+    // test_rref();
 
     return 0;
 }

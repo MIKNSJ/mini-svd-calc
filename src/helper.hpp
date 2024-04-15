@@ -23,4 +23,13 @@ void print_matrix(vector<vector<double>> matrix);
 
 
 
+/**
+ * Prints out a vector.
+ * @param vec A vector.
+ * @return none
+*/
+void print_vector(vector<double> vec);
+
+
+
 #endif

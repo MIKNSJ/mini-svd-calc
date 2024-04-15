@@ -55,26 +55,32 @@ vector<vector<double>> multiply(vector<vector<double>> A,
 
 /**
  * RREF a matrix.
- * @param
+ * @param matrix A matrix.
  * @return A RREF matrix.
 */
+vector<vector<double>> rref(vector<vector<double>> matrix);
 
 
 
 /**
  * Finds the null space of a matrix.
- * @param
+ * @param matrix A rrefed matrix
  * @return A basis of a matrix.
 */
-
+vector<double> null_space(vector<vector<double>> matrix);
 
 
 
 /**
  * Finds u-vectors.
- * @param
- * @return A set of u-vectors to form an orthogonal matrix.
+ * @param s_value The singular value.
+ * @param matrix The original matrix.
+ * @param eigenvector The eigenvector for the singular value.
+ * @return A u-vector.
 */
+vector<double> find_u_vec(double s_value,
+    vector<vector<double>> matrix,
+    vector<double> eigenvector);
 
 
 

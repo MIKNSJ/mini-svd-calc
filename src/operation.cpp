@@ -5,6 +5,7 @@
 // ==================================================
 
 
+
 #include "construct.hpp"
 #include "operation.hpp"
 #include <iostream>
@@ -46,11 +47,13 @@ vector<double> find_eigenvalues(vector<double> char_poly) {
     double discriminant;
     double a, b;
 
-    discriminant = pow(char_poly[1], 2) - (4.0 * char_poly[0] * char_poly[2]);
+    discriminant = sqrt(pow(char_poly[1], 2) -
+        (4.0 * char_poly[0] * char_poly[2]));
 
     if (discriminant < 0) {
         return eigenvalues;
     } else if (discriminant == 0) {
+        eigenvalues.push_back(-char_poly[1] / (2.0 * char_poly[0]));
         eigenvalues.push_back(-char_poly[1] / (2.0 * char_poly[0]));
         return eigenvalues;
     } else {
@@ -144,26 +147,90 @@ vector<vector<double>> multiply(vector<vector<double>> A,
 
 
 /**
- * RREF a matrix
- * @param
- * @return A RREF matrix
+ * RREF a matrix.
+ * @param matrix A matrix.
+ * @return A RREF matrix.
 */
+vector<vector<double>> rref(vector<vector<double>> matrix) {
+    double a;
+    double b;
+    double leading;
+
+    // swap rows so that greatest leading entry is the first row
+    if (matrix[0][0] < matrix[1][0]) {
+        a = matrix[0][0];
+        b = matrix[0][1];
+
+        matrix[0][0] = matrix[1][0];
+        matrix[0][1] = matrix[1][1];
+        matrix[1][0] = a;
+        matrix[1][1] = b;
+    }
+    leading = matrix[0][0];
+
+    // set leading entry of first row to be 1
+    for (int j = 0; j < (int)matrix.size(); j++) {
+        matrix[0][j] /= leading;
+    }
+
+    // row-reduce the second row
+    for (int j = 0; j < (int)matrix.size(); j++) {
+        matrix[1][j] =
+        matrix[1][j] + (-matrix[1][j] / matrix[0][j]) * (matrix[0][j]);
+    }
+
+    return matrix;
+}
 
 
 
 /**
  * Finds the null space of a matrix.
- * @param
+ * @param matrix A rrefed matrix
  * @return A basis of a matrix.
 */
+vector<double> null_space(vector<vector<double>> matrix) {
+    vector<double> eigenvector;
+    double a, b, c, d;
+
+    a = matrix[0][0];
+    b = matrix[0][1];
+    c = matrix[1][0];
+    d = matrix[1][1];
+
+    eigenvector.push_back(-b);
+    eigenvector.push_back(1);
+
+    return eigenvector;
+}
 
 
 
 /**
  * Finds u-vectors.
- * @param
- * @return A set of u-vectors to form an orthogonal matrix.
+ * @param s_value The singular value.
+ * @param matrix The original matrix.
+ * @param eigenvector The eigenvector for the singular value.
+ * @return A u-vector.
 */
+vector<double> find_u_vec(double s_value,
+    vector<vector<double>> matrix,
+    vector<double> eigenvector) {
+    double product;
+    vector<double> u_vec;
+
+    // (1 / s_value) * (matrix_A) * (eigenvector)
+    for (int i = 0; i < (int)matrix.size(); i++) {
+        product = 0;
+        for (int j = 0; j < (int)matrix[i].size(); j++) {
+            product += matrix[i][j] * eigenvector[j];
+        }
+        product = (1.0 / s_value) * product;
+        u_vec.push_back(product);
+    }
+
+    return u_vec;
+}
 
 
 
