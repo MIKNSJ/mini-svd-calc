@@ -3,6 +3,11 @@
 # Intro
 SVD, known as singular value decomposition, is a concept in linear algebra where any matrix can be written into a product of three distinct matrices. You can read more about this topic [here](https://en.wikipedia.org/wiki/Singular_value_decomposition).
 
+# Screenshots
+![matA_csv](screenshots/matAcsv.png)
+
+![matA_output](screenshots/ter_output.png)
+
 # Description
 This calculator computes the SVD of a 2x2 square matrix. The calculator takes a csv file of 2x2 matrices as input where each line/row consists of a 2x2 matrix in the following format a, b, c, d. The variables a, b, c, d represent double values and the delimiter "," denotes separation of entries. In indices form, a matrix is constructed as a = [0][0], b = [0][1], c = [1][0], and d = [1][1]. This is represented as [a b; c d] where the first row would be a and b. However, in this program, matrices will represented either as a 1-D vector or mostly a 2-D vector. The resulting SVD of that matrix is printed to the terminal.
 
